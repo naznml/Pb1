@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Педагогика | Бастауыш сыныптар үшін</title>
+
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --main: #2563eb;
+      --main-dark: #1d4ed8;
+      --soft: #e0ecff;
+      --border: #e5e7eb;
+      --correct: #16a34a;
+      --correct-bg: #dcfce7;
+      --wrong: #dc2626;
+      --wrong-bg: #fee2e2;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 28px 16px 20px;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb, #60a5fa);
+      color: white;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 25px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    main {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 18px 14px 60px;
+    }
+
+    .intro-card,
+    .section-card,
+    .test-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-card {
+      padding: 18px;
+      margin-top: -4px;
+      margin-bottom: 16px;
+    }
+
+    .intro-card h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .intro-card p {
+      margin: 6px 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .source-item {
+      padding: 13px 14px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    .source-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .source-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    @media (min-width: 760px) {
+      .section-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .section-card {
+      padding: 15px;
+    }
+
+    .section-card h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .section-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .unit {
+      margin-top: 20px;
+    }
+
+    .unit-title {
+      margin: 0 0 12px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: var(--soft);
+      border: 1px solid #bfdbfe;
+    }
+
+    .unit-title h2 {
+      margin: 0 0 6px;
+      font-size: 21px;
+    }
+
+    .unit-title p {
+      margin: 0;
+      color: #1e3a8a;
+      font-size: 15px;
+    }
+
+    .test-card {
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .question-head {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .q-number {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--main);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .question-text {
+      margin: 0;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .options {
+      display: grid;
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    .option {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: 0.18s ease;
+      font-size: 15px;
+    }
+
+    .option:hover {
+      border-color: #93c5fd;
+      background: #f8fbff;
+    }
+
+    .option input {
+      margin-top: 4px;
+      accent-color: var(--main);
+    }
+
+    .option.correct {
+      border-color: var(--correct);
+      background: var(--correct-bg);
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .option.wrong {
+      border-color: var(--wrong);
+      background: var(--wrong-bg);
+      color: #7f1d1d;
+    }
+
+    .explanation {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 13px;
+      border-left: 4px solid var(--correct);
+      background: #f0fdf4;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #14532d;
+    }
+
+    .explanation.show {
+      display: block;
+    }
+
+    .result-box {
+      display: none;
+      margin: 16px 0;
+      padding: 14px;
+      border-radius: 15px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .result-box.show {
+      display: block;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 8px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.18s ease;
+    }
+
+    .primary-btn {
+      background: var(--main);
+      color: white;
+    }
+
+    .primary-btn:hover {
+      background: var(--main-dark);
+    }
+
+    .secondary-btn {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .secondary-btn:hover {
+      background: #d1d5db;
+    }
+
+    .small-note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 28px;
+      padding: 20px 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Педагогика | Бастауыш сыныптар үшін</h1>
+    <p>Магистратураға түсуге арналған дайындық материалы. Сұрақтар ресми спецификациядағы тақырыптар мен ұсынылған әдебиеттер негізінде құрастырылған.</p>
+  </header>
+
+  <main>
+    <section class="intro-card">
+      <h2>1-әдебиет бойынша тесттер</h2>
+      <p>Бұл бөлімде Қазақстан Республикасының “Білім туралы” Заңы бойынша негізгі ұғымдар, білім беру жүйесі, білім беру деңгейлері, білім беру мазмұны, инклюзивті білім беру, педагог қызметі және бастауыш білімге қатысты нормалар қарастырылады.</p>
+
+      <div class="source-list">
+        <div class="source-item">
+          <strong>Қазақстан Республикасының “Білім туралы” Заңы</strong>
+          <span>2007 жылғы 27 шілдедегі №319-III ҚРЗ. Дайындық сұрақтары заңдағы ұғымдар мен ресми спецификациядағы тақырыптарға сәйкестендірілді.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div class="section-card">
+        <h3>1. Негізгі ұғымдар</h3>
+        <p>Білім беру, білім беру бағдарламасы, білім беру қызметі, оқыту, оқыту нәтижелері, педагог, инклюзивті білім беру.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>2. Білім беру жүйесі</h3>
+        <p>Білім беру деңгейлері, білім беру мазмұны, оқу бағдарламалары, мектепке дейінгі және бастауыш білім беру сабақтастығы.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>3. Мемлекеттік саясат және басқару</h3>
+        <p>Білім беру саласындағы заңнамалық негіздер, мемлекеттік саясатты іске асыру, жергілікті органдар құзыреті.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>4. Инклюзивті және шағын жинақты мектеп</h3>
+        <p>Ерекше білім беру қажеттіліктері, тең қолжетімділік, шағын жинақты мектеп, тірек мектеп, педагогикалық қолдау.</p>
+      </div>
+    </section>
+
+    <section class="unit" id="unit-law-concepts">
+      <div class="unit-title">
+        <h2>1-бөлім. Заманауи мәдениеттегі білім берудің орны мен рөлі</h2>
+        <p>Тест блогы 1: ҚР “Білім туралы” Заңы бойынша негізгі ұғымдар</p>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">1</div>
+          <p class="question-text">Заң бойынша “білім беру” ұғымының негізгі мазмұны қайсы?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q1" value="A">
+            <span>Білім алушының оқу пәндері бойынша нәтижелерін бағалау өлшемшарттарының жүйесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q1" value="B">
+            <span>Имандылық, зияткерлік, мәдени, тәндік даму мен кәсіби құзыреттілікті қалыптастыруға бағытталған тәрбиелеу мен оқытудың үзіліссіз процесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q1" value="C">
+            <span>Білім беру ұйымдарының қызметін бақылау, талдау, бағалау және болжау процесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q1" value="D">
+            <span>Білім беру бағдарламаларын іске асырудың ұйымдастырушылық-әдістемелік кешені</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q1" value="E">
+            <span>Білім алушылардың белгілі бір оқу деңгейіндегі үлгерімін анықтау рәсімі</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Заңда “білім беру” тұлғаның имандылық, зияткерлік, мәдени, тәндік дамуы мен кәсіби құзыреттілігін қалыптастыру мақсатында жүзеге асырылатын тәрбиелеу мен оқытудың үзіліссіз процесі ретінде анықталған.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">2</div>
+          <p class="question-text">“Білім беру бағдарламасы” заң бойынша қандай мазмұндық кешенді білдіреді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q2" value="A">
+            <span>Білім беру ұйымдарының желісін, контингентін және рейтингтік көрсеткіштерін жүйелі бақылау кешені</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q2" value="B">
+            <span>Оқытудың мақсатын, нәтижелері мен мазмұнын, білім беру процесін ұйымдастыруды және бағалау өлшемшарттарын қамтитын кешен</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q2" value="C">
+            <span>Педагогтердің кәсіби дамуын үздіксіз мониторингтеу және әдістемелік қолдау жүйесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q2" value="D">
+            <span>Білім алушылардың оқу пәні аяқталғаннан кейінгі меңгеру сапасын бағалау рәсімі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q2" value="E">
+            <span>Білім беру саласындағы зерттеулерді ұйымдастыру және ғылыми-әдістемелік материалдарды сынақтан өткізу жиынтығы</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. “Білім беру бағдарламасы” оқытудың мақсаты, нәтижелері, мазмұны, білім беру процесін ұйымдастыру, іске асыру тәсілдері және оқыту нәтижелерін бағалау өлшемшарттары кіретін біртұтас кешен ретінде беріледі.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">3</div>
+          <p class="question-text">Заңдағы “білім беру қызметі” ұғымына қай сипаттама сәйкес келеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q3" value="A">
+            <span>Білім беру процестерінің жағдайы мен нәтижелерін жүйелі түрде бақылау, талдау және болжау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q3" value="B">
+            <span>Оқыту нәтижелерін бағалау арқылы білім алушының дайындық деңгейін айқындау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q3" value="C">
+            <span>Оқу сабақтарының, пәндердің және практиканың көлемі мен бақылау нысандарын регламенттеу</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q3" value="D">
+            <span>Білім беру субъектілерінің мақсатты, педагогтік негізделген, дәйекті өзара іс-қимылы барысында оқыту, дамыту және тәрбиелеу міндеттері шешілетін процесс</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q3" value="E">
+            <span>Білім алушының белгілі бір академиялық кезеңде оқу нәтижелеріне қол жеткізуін өлшейтін біріздендірілген бірлік</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Білім беру қызметі заңда білім беру субъектілерінің мақсатты, педагогтік негізделген және дәйекті өзара іс-қимылы арқылы жеке адамды оқыту, дамыту және тәрбиелеу міндеттері шешілетін процесс ретінде түсіндіріледі.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">4</div>
+          <p class="question-text">“Білім беру мониторингі” ұғымының заңдағы негізгі белгісі қандай?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q4" value="A">
+            <span>Білім алушының оқу бағдарламасын меңгеруін қорытынды бағалау арқылы анықтау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q4" value="B">
+            <span>Білім беру бағдарламасының мақсаты мен мазмұнын іске асыру тәсілдерін белгілеу</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q4" value="C">
+            <span>Білім беру процестерінің жай-күйін, нәтижелерін, шарттарының өзгеруін, контингент пен ұйымдар желісін жүйелі байқау, талдау, бағалау және болжау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q4" value="D">
+            <span>Білім алушылардың оқу пәндері бойынша білім, машық және дағдыларды меңгеру көлемін белгілеу</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q4" value="E">
+            <span>Білім беру ұйымдарының оқу жоспарлары мен үлгілік бағдарламаларын әзірлеу тәртібін анықтау</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Білім беру мониторингі білім беру процестерінің жай-күйін, нәтижелерін, шарттары өзгеруінің серпінін, білім алушылар контингентін және ұйымдар желісін жүйелі байқау, талдау, бағалау және болжаумен байланысты.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">5</div>
+          <p class="question-text">“Оқыту” ұғымының заң бойынша дұрыс сипаттамасын таңдаңыз.</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q5" value="A">
+            <span>Білім, машық, дағды мен құзыреттерді иелену, қабілеттерді дамыту, білімді өмірде қолдану тәжірибесін қалыптастыру жөніндегі мақсатты процесс</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q5" value="B">
+            <span>Білім беру ұйымдарының сапасын ішкі және сыртқы бағалау рәсімдері арқылы қамтамасыз ету процесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q5" value="C">
+            <span>Білім беру деңгейлері бойынша оқу пәндерінің реттілігін, көлемін және бақылау нысандарын белгілеу жүйесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q5" value="D">
+            <span>Білім алушылардың бір оқу пәнін аяқтағаннан кейін меңгеру сапасын анықтайтын бағалау рәсімі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q5" value="E">
+            <span>Педагогтің кәсіби құзыреттілігін курстан кейінгі кезеңде әдістемелік қолдау арқылы дамыту жүйесі</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Оқыту заңда білім алушылар мен тәрбиеленушілердің білімдерді, машықтарды, дағдыларды және құзыреттерді иеленуін, қабілеттерді дамытуын және білімді күнделікті өмірде қолдану тәжірибесін қалыптастыруын ұйымдастыратын мақсатты процесс ретінде берілген.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="E">
+        <div class="question-head">
+          <div class="q-number">6</div>
+          <p class="question-text">“Оқыту нәтижелері” заң бойынша нені білдіреді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q6" value="A">
+            <span>Оқу сабақтарының, оқу пәндерінің және практиканың реттілігін, көлемін және бақылау нысандарын реттейтін құжат</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q6" value="B">
+            <span>Оқытудың мақсаты мен мазмұнын, білім беру процесін ұйымдастыруды және бағалау өлшемшарттарын қамтитын кешен</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q6" value="C">
+            <span>Білім алушылардың оқу пәні аяқталғаннан кейінгі меңгеру сапасын бағалау мақсатындағы рәсім</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q6" value="D">
+            <span>Білім беру ұйымдарының қызметіндегі нәтижелер мен шарттардың өзгеруін жүйелі бақылау және болжау процесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q6" value="E">
+            <span>Білім алушылардың білім беру бағдарламасын меңгеру бойынша алған, көрсететін білімінің, машықтарының, дағдыларының бағалаумен расталған көлемі және құндылықтары</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: E. Оқыту нәтижелері білім алушылардың білім беру бағдарламасын меңгеруі бойынша алған және көрсететін білімінің, машықтарының, дағдыларының бағалаумен расталған көлемі, сондай-ақ қалыптасқан құндылықтар мен қарым-қатынастар ретінде сипатталады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">7</div>
+          <p class="question-text">Заң бойынша “педагог” ұғымына қай анықтама сәйкес келеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q7" value="A">
+            <span>Білім беру процесін басқару мен бақылау саласында мемлекеттік саясатты іске асыратын орталық атқарушы орган</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q7" value="B">
+            <span>Білім беру ұйымында оқу пәндері мен модульдердің мазмұнын меңгеру сапасын бағалайтын маман</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q7" value="C">
+            <span>Педагогтік немесе тиісті бейіні бойынша кәсіби білімі бар, оқыту мен тәрбиелеу, әдістемелік қолдау немесе ұйымдастыру бойынша педагогтің кәсіби қызметін жүзеге асыратын адам</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q7" value="D">
+            <span>Оқу бағдарламаларының мазмұнын, оқу жоспарын және білім беру стандарттарын әзірлейтін құрылымдық бөлімше</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q7" value="E">
+            <span>Білім беру процесінің жай-күйін, нәтижелерін және ұйымдар желісін жүйелі бақылауды жүзеге асыратын тұлға</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Заңда педагог кәсіби білімі бар және білім алушыларды оқыту мен тәрбиелеу, білім беру қызметін әдістемелік қолдау немесе ұйымдастыру бойынша педагогтің кәсіби қызметін жүзеге асыратын адам ретінде анықталған.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">8</div>
+          <p class="question-text">“Инклюзивті білім беру” ұғымының заңдағы басты мәні қандай?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q8" value="A">
+            <span>Ерекше білім беру қажеттіліктері мен жеке-дара мүмкіндіктерді ескере отырып, барлық білім алушылар үшін білім алуға тең қолжетімділікті қамтамасыз ететін процесс</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q8" value="B">
+            <span>Білім алушылардың оқу жетістіктерін мемлекеттік стандарт талаптарына сәйкестендіруді анықтайтын бағалау процесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q8" value="C">
+            <span>Білім беру ұйымдарының желісін, контингентін және рейтингтік көрсеткіштерін жүйелі талдау процесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q8" value="D">
+            <span>Білім беру бағдарламаларының мазмұнын біріктіру негізінде әзірленетін оқу бағдарламаларының жүйесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q8" value="E">
+            <span>Білім алушылардың қабілеті мен бейімділігіне сәйкес тереңдетілген білім беру бағытын ұйымдастыру процесі</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Инклюзивті білім беру ерекше білім беру қажеттіліктері мен жеке мүмкіндіктерді ескеріп, барлық білім алушылар үшін білімге тең қолжетімділікті қамтамасыз ететін процесс ретінде берілген.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">9</div>
+          <p class="question-text">Заң бойынша “шағын жинақты мектеп” қандай мектеп болып табылады?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q9" value="A">
+            <span>Дарынды білім алушыларға арналған мамандандырылған оқу бағдарламаларын іске асыратын білім беру ұйымы</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q9" value="B">
+            <span>Орналасқан жеріне қарамастан бірыңғай мамандандырылған жалпы білім беру бағдарламасын іске асыратын орта білім беру ұйымы</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q9" value="C">
+            <span>Жаратылыстанушылық-математикалық бағытта кең ауқымда және тереңдете білім беретін оқу орны</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q9" value="D">
+            <span>Білім алушылар контингенті шағын, сынып-жинақтары біріктірілген және оқу сабақтарын ұйымдастырудың өзіндік нысаны бар жалпы білім беретін мектеп</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q9" value="E">
+            <span>Қоғамдық-гуманитарлық бағыттар бойынша кең ауқымда және тереңдете білім беруді қамтамасыз ететін оқу орны</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Шағын жинақты мектеп — білім алушылар контингенті шағын, сынып-жинақтары біріктірілген және оқу сабақтарын ұйымдастырудың өзіндік нысаны бар жалпы білім беретін мектеп.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">10</div>
+          <p class="question-text">“Білім беру жүйесі мен білім беру процесін әдіснамалық және ғылыми-әдістемелік қамтамасыз ету” ұғымына қай әрекеттер кешені сәйкес келеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q10" value="A">
+            <span>Білім алушылардың оқу пәндері мен модульдер бойынша меңгеру сапасын бағалау және қорытындылау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q10" value="B">
+            <span>Стандарттар, үлгілік оқу бағдарламалары, оқу жоспарлары, білім беру бағдарламалары мен оқу-әдістемелік материалдар жобаларын дайындау, сынақтан өткізу, ендіру, мониторингілеу және зерттеулер жүргізу</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q10" value="C">
+            <span>Білім беру ұйымдарының қызметін рейтингтік көрсеткіштер бойынша бағалау және олардың нәтижелерін болжау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q10" value="D">
+            <span>Білім алушылардың оқу жетістіктерін мемлекеттік стандарт талаптарына сәйкестігі бойынша қорытынды аттестаттау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q10" value="E">
+            <span>Педагогтердің кәсіби құзыреттілігін курстан кейінгі мониторингтеу және консультациялық көмек арқылы дамыту</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Бұл ұғым мемлекеттік стандарттар, үлгілік оқу бағдарламалары, үлгілік оқу жоспарлары, білім беру бағдарламалары, нормативтік-әдістемелік және оқу-әдістемелік материалдар жобаларын дайындау, сынақтан өткізу, ендіру, мониторингілеу және білім беру саласындағы зерттеулерді қамтиды.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary-btn" onclick="showResult('unit-law-concepts')">Нәтижені көрсету</button>
+        <button class="secondary-btn" onclick="resetUnit('unit-law-concepts')">Қайта тапсыру</button>
+      </div>
+
+      <div class="result-box" id="result-unit-law-concepts"></div>
+      <p class="small-note">Әр сұраққа бір ғана дұрыс жауап белгіленеді. Нәтижені көрсеткеннен кейін дұрыс жауаптар мен түсіндірмелер ашылады.</p>
+    </section>
+        <section class="unit" id="unit-law-system">
+      <div class="unit-title">
+        <h2>1-бөлім. Заманауи мәдениеттегі білім берудің орны мен рөлі</h2>
+        <p>Тест блогы 2: Білім беру жүйесі, білім беру деңгейлері және білім беру мазмұны</p>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">11</div>
+          <p class="question-text">Қазақстан Республикасындағы білім беру жүйесі қандай принцип негізінде білім беру деңгейлерін қамтиды?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q11" value="A">
+            <span>Білім беру ұйымдарының институционалдық дербестігі және басқару құрылымдарының сабақтастығы принципі негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q11" value="B">
+            <span>Білім алушылардың жас ерекшелігі мен оқу жетістіктерін кезеңдік бағалау принципі негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q11" value="C">
+            <span>Жалпы білім беретін оқу және білім беру бағдарламаларының үздіксіздігі және сабақтастығы принципі негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q11" value="D">
+            <span>Білім беру мазмұнын даралау және оқу жоспарларын бейіндік бағытта құру принципі негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q11" value="E">
+            <span>Білім беру қызметін әдістемелік қолдау және педагогтердің кәсіби өсуін қамтамасыз ету принципі негізінде</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Заң бойынша Қазақстан Республикасындағы білім беру жүйесі жалпы білім беретін оқу және білім беру бағдарламаларының үздіксіздігі және сабақтастығы принципі негізінде білім беру деңгейлерін қамтиды.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">12</div>
+          <p class="question-text">Заң бойынша білім беру деңгейлерінің алғашқы сатысы қайсы?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q12" value="A">
+            <span>Мектепке дейінгі тәрбие мен оқыту</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q12" value="B">
+            <span>Бастауыш білім беру</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q12" value="C">
+            <span>Негізгі орта білім беру</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q12" value="D">
+            <span>Орта білімнен кейінгі білім беру</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q12" value="E">
+            <span>Жоғары оқу орнынан кейінгі білім беру</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Білім беру деңгейлері мектепке дейінгі тәрбие мен оқытудан басталады. Одан кейін бастауыш, негізгі орта, орта, орта білімнен кейінгі, жоғары және жоғары оқу орнынан кейінгі білім деңгейлері беріледі.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">13</div>
+          <p class="question-text">Заң бойынша орта білім беру құрамына қандай білім түрлері кіреді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q13" value="A">
+            <span>Бастауыш білім беру және негізгі орта білім беру</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q13" value="B">
+            <span>Негізгі орта білім беру және орта білімнен кейінгі білім беру</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q13" value="C">
+            <span>Жалпы орта білім беру және жоғары білім беру</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q13" value="D">
+            <span>Жалпы орта білім беру, техникалық және кәсіптік білім беру</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q13" value="E">
+            <span>Техникалық және кәсіптік білім беру, жоғары оқу орнынан кейінгі білім беру</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Заңда орта білім беру жалпы орта білім беруді, техникалық және кәсіптік білім беруді қамтитыны көрсетілген.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">14</div>
+          <p class="question-text">Заң бойынша білім беру мазмұны қалай анықталады?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q14" value="A">
+            <span>Білім беру ұйымдарының қызмет нәтижелері мен рейтингтік көрсеткіштері арқылы анықталатын сапалық өлшемдер жүйесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q14" value="B">
+            <span>Жеке адамның біліктілігі мен жан-жақты дамуын қалыптастыруға негіз болатын әрбір білім беру деңгейі бойынша білімдер жүйесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q14" value="C">
+            <span>Оқу пәндерінің меңгерілу сапасын бағалау және білім алушылардың қорытынды нәтижесін белгілеу рәсімі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q14" value="D">
+            <span>Педагогтердің кәсіби құзыреттілігін жетілдіруге бағытталған әдістемелік және консультациялық қолдау кешені</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q14" value="E">
+            <span>Білім беру процесінде оқыту, тәрбиелеу және дамыту міндеттерін шешетін субъектілердің өзара іс-қимылы</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Білім беру мазмұны жеке адамның біліктілігі мен жан-жақты дамуын қалыптастыру үшін негіз болатын білім берудің әрбір деңгейі бойынша білімдер жүйесі ретінде анықталады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="E">
+        <div class="question-head">
+          <div class="q-number">15</div>
+          <p class="question-text">Білім беру мазмұны заң бойынша ненің негізінде әзірленетін оқу және білім беру бағдарламаларымен айқындалады?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q15" value="A">
+            <span>Білім беру мониторингінің нәтижелері негізінде әзірленетін ішкі сапа рәсімдерімен</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q15" value="B">
+            <span>Педагогтердің кәсіби стандарттары негізінде әзірленетін әдістемелік ұсынымдармен</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q15" value="C">
+            <span>Білім алушылардың қорытынды аттестаттау нәтижелері негізінде әзірленетін бағалау жүйесімен</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q15" value="D">
+            <span>Жергілікті атқарушы органдардың құзыреті негізінде әзірленетін басқару жоспарларымен</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q15" value="E">
+            <span>Мемлекеттік жалпыға міндетті стандарттар негізінде әзірленетін жалпы білім беретін оқу және білім беру бағдарламаларымен</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: E. Заңда білім беру мазмұны мемлекеттік жалпыға міндетті стандарттар негізінде әзірленетін жалпы білім беретін оқу және білім беру бағдарламаларымен айқындалатыны көрсетіледі.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">16</div>
+          <p class="question-text">Білім беру бағдарламалары мазмұны мен бағыттарына қарай қандай түрлерге бөлінеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q16" value="A">
+            <span>Жалпы білім беретін, кәсіптік және қосымша бағдарламалар</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q16" value="B">
+            <span>Бастауыш, негізгі орта және жалпы орта бағдарламалар</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q16" value="C">
+            <span>Үлгілік, жұмыстық және эксперименттік бағдарламалар</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q16" value="D">
+            <span>Мектепке дейінгі, орта және жоғары білім бағдарламалары</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q16" value="E">
+            <span>Күндізгі, қашықтан және онлайн оқыту бағдарламалары</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Заң бойынша білім беру бағдарламалары мазмұны мен бағыттарына қатысты жалпы білім беретін, кәсіптік және қосымша болып бөлінеді.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">17</div>
+          <p class="question-text">Мектепке дейінгі тәрбие мен оқытудың жалпы білім беретін оқу бағдарламалары қандай негізде әзірленеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q17" value="A">
+            <span>Бастауыш білім берудің оқу жоспарлары мен оқу пәндерінің реттілігі негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q17" value="B">
+            <span>Жалпы орта білім берудің қорытынды аттестаттау талаптары негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q17" value="C">
+            <span>Мектеп жасына дейінгі балалардың іс-әрекет түрлерінің ерекшеліктерін ескере отырып, мемлекеттік жалпыға міндетті стандарт негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q17" value="D">
+            <span>Білім беру ұйымдары желісінің көрсеткіштері мен мониторинг нәтижелері негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q17" value="E">
+            <span>Педагогтердің кәсіби дамуын әдістемелік қолдау бағдарламалары негізінде</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Мектепке дейінгі тәрбие мен оқытудың жалпы білім беретін оқу бағдарламалары мектеп жасына дейінгі балалар үшін іс-әрекет түрлерінің ерекшеліктерін ескере отырып, мектепке дейінгі тәрбие мен оқытудың мемлекеттік жалпыға міндетті стандарты негізінде әзірленеді.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">18</div>
+          <p class="question-text">Мектепке дейінгі тәрбие мен оқыту бағдарламалары мектепке дейінгі және бастауыш білім берудің қандай байланысын қамтамасыз етеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q18" value="A">
+            <span>Бағалау мен аттестаттаудың кезеңдік байланысын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q18" value="B">
+            <span>Оқу жоспары мен пәндік бақылаудың құрылымдық байланысын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q18" value="C">
+            <span>Мамандандырылған білім мен бейіндік оқытудың мазмұндық байланысын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q18" value="D">
+            <span>Сабақтастығы мен үздіксіздігін</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q18" value="E">
+            <span>Мониторинг пен басқарудың ұйымдастырушылық байланысын</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Мектепке дейінгі тәрбие мен оқытудың жалпы білім беретін оқу бағдарламалары балаларды тәрбиелеу, оқыту, дамыту және сауықтыру тұтастығын ескере отырып, мектепке дейінгі және бастауыш білім берудің сабақтастығы мен үздіксіздігін қамтамасыз етеді.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">19</div>
+          <p class="question-text">Мектепке дейінгі оқытудың жалпы білім беретін оқу бағдарламалары қандай бастапқы дағдыларды қалыптастырады?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q19" value="A">
+            <span>Ғылыми зерттеу, академиялық жазу, жобалық талдау және кәсіби бағдар дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q19" value="B">
+            <span>Оқу, жазу, есептеу және тілдік қатынас тәжірибесінің қарапайым дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q19" value="C">
+            <span>Кәсіптік практика, өндірістік оқыту және дуальды даярлық дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q19" value="D">
+            <span>Бейіндік таңдау, пәндік тереңдету және мамандандырылған оқу дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q19" value="E">
+            <span>Қорытынды аттестаттау, өзіндік бағалау және рейтингтік бақылау дағдыларын</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Мектепке дейінгі оқытудың жалпы білім беретін оқу бағдарламалары оқудың, жазудың, есептеудің және тілдік қатынас тәжірибесінің қарапайым дағдыларын қалыптастырады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="E">
+        <div class="question-head">
+          <div class="q-number">20</div>
+          <p class="question-text">Мектепке дейінгі оқытудың жалпы білім беретін оқу бағдарламалары бастауыш білім беруге қатысты қандай жағдай жасауды көздейді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q20" value="A">
+            <span>Бастауыш білім беруді қорытынды аттестаттау үшін бірыңғай бақылау жағдайларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q20" value="B">
+            <span>Бастауыш білім беру пәндерін бейіндік бағытта тереңдетіп оқыту жағдайларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q20" value="C">
+            <span>Бастауыш білім беру ұйымдарын рейтингтік бағалау үшін мониторингтік жағдайларды</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q20" value="D">
+            <span>Бастауыш білім беру педагогтерін курстан кейін қолдау үшін әдістемелік жағдайларды</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q20" value="E">
+            <span>Бастауыш білім беруді меңгеру үшін бірдей бастапқы жағдайларды</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: E. Мектепке дейінгі оқытудың жалпы білім беретін оқу бағдарламалары бастауыш білім беруді меңгеру үшін бірдей бастапқы жағдайларды жасауды көздейді.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary-btn" onclick="showResult('unit-law-system')">Нәтижені көрсету</button>
+        <button class="secondary-btn" onclick="resetUnit('unit-law-system')">Қайта тапсыру</button>
+      </div>
+
+      <div class="result-box" id="result-unit-law-system"></div>
+      <p class="small-note">Бұл блок білім беру деңгейлері мен білім беру мазмұнына арналған. Барлық жауап нұсқалары заңдағы жақын ұғымдар мен бір тақырыптағы мазмұндардан құрастырылды.</p>
+    </section>
+        <section class="unit" id="unit-law-primary-secondary">
+      <div class="unit-title">
+        <h2>1-бөлім. Заманауи мәдениеттегі білім берудің орны мен рөлі</h2>
+        <p>Тест блогы 3: Бастауыш, негізгі орта және жалпы орта білім берудің оқу бағдарламалары</p>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">21</div>
+          <p class="question-text">Бастауыш білім берудің жалпы білім беретін оқу бағдарламалары ең алдымен неге бағытталған?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q21" value="A">
+            <span>Білім алушылардың ғылым жүйесінің базалық негіздерін меңгеруіне және кәсіптік бағдарлануына</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q21" value="B">
+            <span>Баланың жеке басын қалыптастыруға, жеке қабілеттерін, оқу ісіндегі оң талпынысы мен алғырлығын дамытуға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q21" value="C">
+            <span>Бейіндік оқытуды енгізу арқылы білім мазмұнын саралау, интеграциялау және кәсіптік бағдарлауға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q21" value="D">
+            <span>Білім алушылардың өндірістік оқыту мен кәсіптік практикадан өтуін ұйымдастыруға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q21" value="E">
+            <span>Дарынды балалардың ғылым, мәдениет, өнер және спорт негіздерін терең игеруіне</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Бастауыш білім берудің жалпы білім беретін оқу бағдарламалары баланың жеке басын қалыптастыруға, жеке қабілеттерін, оқу ісіндегі оң талпынысы мен алғырлығын дамытуға бағытталған.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="E">
+        <div class="question-head">
+          <div class="q-number">22</div>
+          <p class="question-text">Бастауыш білім беру бағдарламалары негізгі мектепті кейін меңгеру үшін қандай берік дағдыларды дамытуға бағытталады?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q22" value="A">
+            <span>Бейіндік таңдау, кәсіби бағдар, өндірістік тәжірибе және оқу-өндірістік жұмыс дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q22" value="B">
+            <span>Ғылыми зерттеу, академиялық жазу, әлеуметтік жоба және кәсіби талдау дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q22" value="C">
+            <span>Мамандандырылған даярлық, әскери іс, өнер және спорт негіздерін терең меңгеру дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q22" value="D">
+            <span>Қорытынды аттестаттау, рейтингтік бағалау, мониторинг және сыртқы бақылау дағдыларын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q22" value="E">
+            <span>Оқу, жазу, есептеу, тілдік қатынас, шығармашылық тұрғыдан өзін-өзі көрсету және мінез-құлық мәдениеті дағдыларын</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: E. Заңда бастауыш білім беру бағдарламалары негізгі мектептің білім беру бағдарламаларын кейін меңгеру үшін оқу, жазу, есептеу, тілдік қатынас, шығармашылық өзін-өзі көрсету және мінез-құлық мәдениеті дағдыларын дамытуға бағытталғаны көрсетілген.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">23</div>
+          <p class="question-text">Негізгі орта білім берудің жалпы білім беретін оқу бағдарламалары білім алушыларды қандай мазмұнға бағыттайды?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q23" value="A">
+            <span>Ғылым жүйесінің базалық негіздерін меңгеруге, тұлғааралық және этносаралық қатынас мәдениетін қалыптастыруға, өзін-өзі билеу мен кәсіптік бағдарлануға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q23" value="B">
+            <span>Оқу, жазу, есептеу, тілдік қатынас және мінез-құлық мәдениетінің бастапқы дағдыларын қалыптастыруға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q23" value="C">
+            <span>Бейіндік оқытуды енгізу арқылы білім мазмұнын саралау, интеграциялау және кәсіптік бағдарлауға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q23" value="D">
+            <span>Білім алушылардың өндірістік оқыту, кәсіптік практика және жұмысшы біліктілігін меңгеруіне</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q23" value="E">
+            <span>Дарынды балалардың шығармашылық әлеуеті мен ерекше қабілеттерін арнайы ұйымда дамытуға</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Негізгі орта білім беру бағдарламалары білім алушылардың ғылым жүйесінің базалық негіздерін меңгеруіне, тұлғааралық және этносаралық қатынастың жоғары мәдениетін қалыптастыруына, жеке адамның өзін-өзі билеуіне және кәсіптік бағдарлануына бағытталады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">24</div>
+          <p class="question-text">Негізгі орта білім берудің жалпы білім беретін оқу бағдарламасы қандай даярлықты қамтиды?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q24" value="A">
+            <span>Мектепке дейінгі даярлықты</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q24" value="B">
+            <span>Бастапқы сауат ашу даярлығын</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q24" value="C">
+            <span>Бейін алды даярлықты</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q24" value="D">
+            <span>Өндірістік даярлықты</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q24" value="E">
+            <span>Әскери даярлықты</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Заңда жалпы білім беретін оқу бағдарламасы білім алушылардың бейін алды даярлығын қамтитыны көрсетілген.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">25</div>
+          <p class="question-text">Әрбір пәннің мазмұнын зерделеу қай білім беру деңгейінде аяқталады?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q25" value="A">
+            <span>Мектепке дейінгі тәрбие мен оқыту деңгейінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q25" value="B">
+            <span>Бастауыш білім беру деңгейінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q25" value="C">
+            <span>Жалпы орта білім беру деңгейінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q25" value="D">
+            <span>Негізгі орта білім беру деңгейінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q25" value="E">
+            <span>Орта білімнен кейінгі білім беру деңгейінде</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Заңда әрбір пәннің мазмұнын зерделеу негізгі орта білім беру деңгейінде аяқталатыны көрсетілген.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">26</div>
+          <p class="question-text">Негізгі орта білім берудің жалпы білім беретін оқу бағдарламасын меңгеру мерзімі қанша?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q26" value="A">
+            <span>Төрт жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q26" value="B">
+            <span>Бес жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q26" value="C">
+            <span>Алты жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q26" value="D">
+            <span>Екі жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q26" value="E">
+            <span>Үш жыл</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Негізгі орта білім берудің жалпы білім беретін оқу бағдарламасын меңгеру мерзімі — бес жыл.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="E">
+        <div class="question-head">
+          <div class="q-number">27</div>
+          <p class="question-text">Жалпы орта білімнің жалпы білім беретін оқу бағдарламалары қандай негізде әзірленеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q27" value="A">
+            <span>Оқу, жазу, есептеу және тілдік қатынас дағдыларын бастапқы қалыптастыру негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q27" value="B">
+            <span>Ғылым жүйесінің базалық негіздерін меңгеру және этносаралық қатынас мәдениетін қалыптастыру негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q27" value="C">
+            <span>Өндірістік оқыту мен кәсіптік практикадан өту және жұмысшы біліктілігін беру негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q27" value="D">
+            <span>Дарынды балалардың шығармашылық әлеуетін және мамандандырылған қабілеттерін дамыту негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q27" value="E">
+            <span>Бейіндік оқытуды енгізе отырып, білім беру мазмұнын саралау, интеграциялау және кәсіптік бағдарлау негізінде</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: E. Жалпы орта білімнің оқу бағдарламалары бейіндік оқытуды енгізе отырып, білім беру мазмұнын саралау, интеграциялау және кәсіптік бағдарлау негізінде әзірленеді.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">28</div>
+          <p class="question-text">Жалпы орта білім берудің жалпы білім беретін оқу бағдарламасын игеру мерзімі қанша?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q28" value="A">
+            <span>Екі жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q28" value="B">
+            <span>Үш жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q28" value="C">
+            <span>Төрт жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q28" value="D">
+            <span>Бес жыл</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q28" value="E">
+            <span>Алты жыл</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Жалпы орта білім берудің жалпы білім беретін оқу бағдарламасын игеру мерзімі — екі жыл.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">29</div>
+          <p class="question-text">Бастауыш білім беру бағдарламасы мен негізгі орта білім беру бағдарламасының айырмашылығы қай жауапта дұрыс берілген?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q29" value="A">
+            <span>Бастауыш білім бейіндік оқытуға, ал негізгі орта білім өндірістік практикаға бағытталады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q29" value="B">
+            <span>Бастауыш білім ғылым жүйесінің базалық негіздерін аяқтауға, ал негізгі орта білім бастапқы сауат ашуға бағытталады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q29" value="C">
+            <span>Бастауыш білім бастапқы оқу дағдылары мен тұлғалық қалыптасуға, ал негізгі орта білім ғылым негіздері мен кәсіптік бағдарлануға бағытталады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q29" value="D">
+            <span>Бастауыш білім мамандандырылған даярлыққа, ал негізгі орта білім мектепке дейінгі сабақтастыққа бағытталады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q29" value="E">
+            <span>Бастауыш білім дуальды оқытуға, ал негізгі орта білім жоғары оқу орнына дайындыққа бағытталады</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Бастауыш білім баланың жеке басын қалыптастыруға және оқу, жазу, есептеу сияқты берік дағдыларды дамытуға бағытталса, негізгі орта білім ғылым жүйесінің базалық негіздерін меңгеруге, мәдени қатынасқа, өзін-өзі билеуге және кәсіптік бағдарлануға бағытталады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">30</div>
+          <p class="question-text">Негізгі орта және жалпы орта білім беру бағдарламаларының байланысын дұрыс көрсететін жауап қайсы?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q30" value="A">
+            <span>Негізгі орта білім бастапқы оқу дағдыларын қалыптастырады, ал жалпы орта білім мектепке дейінгі сабақтастықты қамтамасыз етеді</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q30" value="B">
+            <span>Негізгі орта білім өндірістік оқытуды қамтиды, ал жалпы орта білім кәсіптік практикаға толық бағытталады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q30" value="C">
+            <span>Негізгі орта білім дарынды балаларға мамандандырылған бағдарлама ұсынады, ал жалпы орта білім арнайы оқу бағдарламасын іске асырады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q30" value="D">
+            <span>Негізгі орта білім бейін алды даярлықты қамтиды, ал жалпы орта білім бейіндік оқытуды енгізе отырып саралау, интеграциялау және кәсіптік бағдарлау негізінде құрылады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q30" value="E">
+            <span>Негізгі орта білім жоғары білімге тікелей даярлайды, ал жалпы орта білім жоғары оқу орнынан кейінгі білімге бағытталады</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Негізгі орта білім бағдарламасы бейін алды даярлықты қамтиды, ал жалпы орта білім бағдарламалары бейіндік оқытуды енгізе отырып, білім мазмұнын саралау, интеграциялау және кәсіптік бағдарлау негізінде әзірленеді.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary-btn" onclick="showResult('unit-law-primary-secondary')">Нәтижені көрсету</button>
+        <button class="secondary-btn" onclick="resetUnit('unit-law-primary-secondary')">Қайта тапсыру</button>
+      </div>
+
+      <div class="result-box" id="result-unit-law-primary-secondary"></div>
+      <p class="small-note">Бұл блок бастауыш, негізгі орта және жалпы орта білім беру бағдарламаларының мазмұндық ерекшеліктеріне арналған.</p>
+    </section>
+        <section class="unit" id="unit-law-inclusive-special">
+      <div class="unit-title">
+        <h2>1-бөлім. Заманауи мәдениеттегі білім берудің орны мен рөлі</h2>
+        <p>Тест блогы 4: Инклюзивті білім беру, ерекше білім беру қажеттіліктері және арнайы оқу бағдарламалары</p>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">31</div>
+          <p class="question-text">Заң бойынша ерекше білім беруді қажет ететін адамдарға қай анықтама сәйкес келеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q31" value="A">
+            <span>Тиісті деңгейде білім алу және қосымша білім алу үшін арнаулы жағдайларға тұрақты немесе уақытша қажеттілік көріп жүрген адамдар</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q31" value="B">
+            <span>Білім беру бағдарламасын меңгеру бойынша бағалаумен расталған білім, машық және дағды көлемін көрсететін адамдар</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q31" value="C">
+            <span>Жалпы орта білімнің бейіндік оқыту мазмұнын саралау және кәсіптік бағдарлау арқылы меңгеретін адамдар</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q31" value="D">
+            <span>Мектепке дейінгі және бастауыш білім берудің сабақтастығын қамтамасыз ететін бағдарламаларға қатысатын адамдар</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q31" value="E">
+            <span>Ғылым жүйесінің базалық негіздерін меңгеріп, тұлғааралық қатынас мәдениетін қалыптастыратын адамдар</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Ерекше білім беруді қажет ететін адамдар — тиісті деңгейде білім алу және қосымша білім алу үшін арнаулы жағдайларға тұрақты немесе уақытша қажеттілік көріп жүрген адамдар.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">32</div>
+          <p class="question-text">“Ерекше білім беру қажеттіліктерін бағалау” ұғымы нені білдіреді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q32" value="A">
+            <span>Білім беру процесінің жай-күйі мен нәтижелерін жүйелі түрде байқау, талдау және болжау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q32" value="B">
+            <span>Білім алушының оқу пәні немесе модуль бойынша меңгеру сапасын анықтайтын рәсім</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q32" value="C">
+            <span>Педагогтің кәсіби құзыреттілігін курстан кейінгі мониторинг арқылы дамыту жүйесі</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q32" value="D">
+            <span>Білім алу үшін қажетті арнаулы жағдайларды айқындау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q32" value="E">
+            <span>Білім беру мазмұнын мемлекеттік стандарт негізінде оқу бағдарламаларымен белгілеу</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Ерекше білім беру қажеттіліктерін бағалау — білім алу үшін қажетті арнаулы жағдайларды айқындау.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">33</div>
+          <p class="question-text">Жалпы білім беретін мектеп заң бойынша қандай бағдарламаларды іске асыратын білім беру ұйымы?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q33" value="A">
+            <span>Тек бастауыш, негізгі орта және жалпы орта білімнің оқу бағдарламаларын іске асыратын ұйым</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q33" value="B">
+            <span>Мектепке дейінгі тәрбие мен оқыту, бастауыш, негізгі орта және жалпы орта білім, арнаулы оқу мен жеке дамыту, қосымша білім бағдарламаларын іске асыратын ұйым</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q33" value="C">
+            <span>Жоғары білім, жоғары оқу орнынан кейінгі білім және ғылыми-зерттеу бағдарламаларын іске асыратын ұйым</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q33" value="D">
+            <span>Техникалық және кәсіптік білім, өндірістік оқыту және кәсіптік практика бағдарламаларын іске асыратын ұйым</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q33" value="E">
+            <span>Мамандандырылған жалпы білім беру және әскерге шақыруға дейінгі тереңдетілген даярлық бағдарламаларын іске асыратын ұйым</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Жалпы білім беретін мектеп мектепке дейінгі тәрбие мен оқыту, бастауыш, негізгі орта және жалпы орта білім бағдарламаларын, арнаулы оқу мен жеке дамыту бағдарламаларын, сондай-ақ қосымша білім бағдарламаларын іске асыратын ұйым ретінде беріледі.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="E">
+        <div class="question-head">
+          <div class="q-number">34</div>
+          <p class="question-text">Психологиялық-педагогикалық қолдап отырудың негізгі мақсаты қайсы?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q34" value="A">
+            <span>Білім беру ұйымдарының желісін, контингентін және рейтингтік көрсеткіштерін жүйелі бағалау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q34" value="B">
+            <span>Жалпы орта білім мазмұнын бейіндік оқыту арқылы саралау және кәсіптік бағдарлау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q34" value="C">
+            <span>Педагогтің курстан кейінгі қызметін үздіксіз мониторингтеу және әдістемелік қолдау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q34" value="D">
+            <span>Білім алушының оқу пәнін меңгеру сапасын аяқталғаннан кейін бағалау</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q34" value="E">
+            <span>Ерекше білім беруді қажет ететін балаларды ойдағыдай оқыту және дамыту үшін әлеуметтік және психологиялық-педагогикалық жағдайлар жасау</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: E. Психологиялық-педагогикалық қолдап отыру білім беру ұйымдарында іске асырылып, ерекше білім беруді қажет ететін балаларды ойдағыдай оқыту және дамыту үшін әлеуметтік және психологиялық-педагогикалық жағдайлар жасауға бағытталады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">35</div>
+          <p class="question-text">Арнайы оқу бағдарламалары қандай білім беру бағдарламалары негізінде әзірленеді?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q35" value="A">
+            <span>Жоғары білім және жоғары оқу орнынан кейінгі білім бағдарламалары негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q35" value="B">
+            <span>Қосымша білім және дарынды балаларға арналған мамандандырылған бағдарламалар негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q35" value="C">
+            <span>Мектепке дейінгі тәрбие мен оқыту, бастауыш, негізгі орта, жалпы орта және техникалық-кәсіптік білім бағдарламалары негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q35" value="D">
+            <span>Орта білімнен кейінгі білім және қолданбалы бакалавриат бағдарламалары негізінде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q35" value="E">
+            <span>Ғылыми-зерттеу және академиялық ұтқырлық бағдарламалары негізінде</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Арнайы оқу бағдарламалары мектепке дейінгі тәрбие мен оқытудың, бастауыш, негізгі орта, жалпы орта білімнің және техникалық-кәсіптік білімнің білім беру бағдарламалары негізінде әзірленеді.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="A">
+        <div class="question-head">
+          <div class="q-number">36</div>
+          <p class="question-text">Арнайы оқу бағдарламалары кімдерді оқытуға және дамытуға бағытталады?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q36" value="A">
+            <span>Мүмкіндігі шектеулі балаларды оқытуға және дамытуға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q36" value="B">
+            <span>Дарынды балаларды тереңдетілген шығармашылық даярлауға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q36" value="C">
+            <span>Жоғары білім алушыларды кәсіптік практикаға даярлауға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q36" value="D">
+            <span>Жалпы орта білім алушыларды бейіндік оқытуға</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q36" value="E">
+            <span>Техникалық білім алушыларды өндірістік оқытуға</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: A. Заң бойынша арнайы оқу бағдарламалары мүмкіндігі шектеулі балаларды оқытуға және дамытуға бағытталады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="D">
+        <div class="question-head">
+          <div class="q-number">37</div>
+          <p class="question-text">Арнайы оқу бағдарламаларында қандай ерекшеліктер ескеріледі?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q37" value="A">
+            <span>Білім беру ұйымдарының рейтингтік көрсеткіштері мен басқару құрылымдарының ерекшеліктері</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q37" value="B">
+            <span>Оқу пәндерінің бақылау нысандары мен қорытынды аттестаттау рәсімдерінің ерекшеліктері</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q37" value="C">
+            <span>Бейіндік оқыту бағыттары мен кәсіптік бағдарлау жоспарларының ерекшеліктері</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q37" value="D">
+            <span>Психологиялық-медициналық-педагогтік консультациялар ұсынымдары бойынша айқындалатын психикалық-физикалық ерекшеліктері мен танымдық мүмкіндіктері</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q37" value="E">
+            <span>Ғылыми-зерттеу жұмыстары мен академиялық ұтқырлық нәтижелерінің ерекшеліктері</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: D. Арнайы оқу бағдарламалары білім алушылар мен тәрбиеленушілердің психологиялық-медициналық-педагогтік консультациялар ұсынымдары ескеріле отырып айқындалатын психикалық-физикалық ерекшеліктері мен танымдық мүмкіндіктерін ескереді.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="B">
+        <div class="question-head">
+          <div class="q-number">38</div>
+          <p class="question-text">Арнайы оқу бағдарламалары қай жерде іске асырылуы мүмкін?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q38" value="A">
+            <span>Тек арнаулы білім беру ұйымдарында және жоғары білім беру ұйымдарында</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q38" value="B">
+            <span>Арнаулы білім беру ұйымдарында, мектепке дейінгі ұйымдарда, жалпы білім беретін мектептерде, техникалық-кәсіптік білім беру ұйымдарында немесе үйде</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q38" value="C">
+            <span>Тек жалпы білім беретін мектептерде және мамандандырылған білім беру ұйымдарында</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q38" value="D">
+            <span>Жоғары оқу орындарында, ғылыми ұйымдарда және академиялық ұтқырлық орталықтарында</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q38" value="E">
+            <span>Колледждерде, өндірістік ұйымдарда және кәсіптік практика базаларында ғана</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: B. Арнайы оқу бағдарламалары арнаулы білім беру ұйымдарында, мектепке дейінгі ұйымдарда, жалпы білім беретін мектептерде, техникалық және кәсіптік білім беру ұйымдарында немесе үйде іске асырылады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="E">
+        <div class="question-head">
+          <div class="q-number">39</div>
+          <p class="question-text">Инклюзивті білім беру мен арнайы оқу бағдарламаларының байланысын дұрыс көрсететін жауап қайсы?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q39" value="A">
+            <span>Инклюзивті білім беру рейтингтік бағалау жүйесін белгілейді, ал арнайы оқу бағдарламалары аттестаттау рәсімін реттейді</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q39" value="B">
+            <span>Инклюзивті білім беру бейіндік оқытуды енгізеді, ал арнайы оқу бағдарламалары жалпы орта білімді саралайды</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q39" value="C">
+            <span>Инклюзивті білім беру жоғары білімге қолжетімділікті реттейді, ал арнайы оқу бағдарламалары академиялық ұтқырлықты ұйымдастырады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q39" value="D">
+            <span>Инклюзивті білім беру педагогтердің кәсіби дамуын қамтамасыз етеді, ал арнайы оқу бағдарламалары курстан кейінгі қолдауды жүзеге асырады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q39" value="E">
+            <span>Инклюзивті білім беру тең қолжетімділікті қамтамасыз етеді, ал арнайы оқу бағдарламалары ерекше қажеттіліктері бар балаларды оқыту мен дамытуға бағытталады</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: E. Инклюзивті білім беру барлық білім алушыларға тең қолжетімділікті қамтамасыз етумен байланысты, ал арнайы оқу бағдарламалары мүмкіндігі шектеулі балаларды оқытуға және дамытуға бағытталады.
+        </div>
+      </div>
+
+      <div class="test-card question" data-answer="C">
+        <div class="question-head">
+          <div class="q-number">40</div>
+          <p class="question-text">Ерекше білім беру қажеттілігі бар балаларды қолдауда бағалау мен қолдап отырудың байланысы қандай?</p>
+        </div>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q40" value="A">
+            <span>Бағалау білім беру ұйымының рейтингін белгілейді, ал қолдап отыру ұйым желісін мониторингтейді</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q40" value="B">
+            <span>Бағалау оқу бағдарламасының мазмұнын бекітеді, ал қолдап отыру пәндік бақылау нысандарын реттейді</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q40" value="C">
+            <span>Бағалау қажетті арнаулы жағдайларды айқындайды, ал қолдап отыру оқыту мен дамыту үшін әлеуметтік және психологиялық-педагогикалық жағдайлар жасайды</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q40" value="D">
+            <span>Бағалау бейіндік оқыту бағытын анықтайды, ал қолдап отыру кәсіптік бағдарлауды ұйымдастырады</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q40" value="E">
+            <span>Бағалау академиялық кредитті есептейді, ал қолдап отыру жоғары білім бағдарламасын қысқартады</span>
+          </label>
+        </div>
+
+        <div class="explanation">
+          Дұрыс жауап: C. Ерекше білім беру қажеттіліктерін бағалау білім алу үшін қажетті арнаулы жағдайларды айқындайды, ал психологиялық-педагогикалық қолдап отыру сол балаларды ойдағыдай оқыту және дамыту үшін әлеуметтік және психологиялық-педагогикалық жағдайлар жасауға бағытталады.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary-btn" onclick="showResult('unit-law-inclusive-special')">Нәтижені көрсету</button>
+        <button class="secondary-btn" onclick="resetUnit('unit-law-inclusive-special')">Қайта тапсыру</button>
+      </div>
+
+      <div class="result-box" id="result-unit-law-inclusive-special"></div>
+      <p class="small-note">Бұл блок инклюзивті білім беру, ерекше білім беру қажеттіліктері, арнайы оқу бағдарламалары және психологиялық-педагогикалық қолдау ұғымдарын ажыратуға арналған.</p>
+    </section>
+    
+    
